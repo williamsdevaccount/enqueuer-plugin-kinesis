@@ -1,0 +1,23 @@
+publishers:
+-   type: kinesis
+    name: publisher description
+    streamName: test-stream
+    awsConfiguration: <<awsConfiguration>>
+    createStream: false
+    payload: enqueuer
+subscriptions:
+-   type: kinesis
+    name: my subscription
+    streamName: test-stream
+    awsConfiguration: <<awsConfiguration>>
+    createStream: false
+    timeout: 5000
+    onMessageReceived:
+        script: payload = Buffer.from(message.payload);
+        assertions:
+        -   name: Payload
+            expect: payload
+            toBeEqualTo: `enqueuer`
+        -   name: Beatles song
+            expect: payload.length
+            toBeGreaterThan: 5

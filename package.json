@@ -1,0 +1,44 @@
+{
+  "name": "enqueuer-plugin-kinesis",
+  "version": "1.0.0",
+  "description": "Enqueuer AWS kinesis plugin",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "all": "npm run clean && npm run lint && npm run build",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "kinesisLocalStart": "pm2 start kinesisliteserver/index.js --name \"kinesislocal\"",
+    "kinesisLocalStop": "pm2 stop kinesislocal && pm2 delete kinesislocal",
+    "lint": "node_modules/.bin/tslint --project tsconfig.json",
+    "prepublishOnly": "npm run all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamsdevaccount/enqueuer-plugin-kinesis"
+  },
+  "keywords": [
+    "enqueuer",
+    "nqr",
+    "kinesis",
+    "plugin"
+  ],
+  "author": "William Stowers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/williamsdevaccount/enqueuer-plugin-kinesis/issues"
+  },
+  "homepage": "https://github.com/williamsdevaccount/enqueuer-plugin-kinesis#readme",
+  "devDependencies": {
+    "@types/node": "^11.9.4",
+    "kinesalite": "^2.0.0",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.406.0",
+    "enqueuer-plugins-template": "^1.0.4",
+    "kinesis-readable": "^1.2.0"
+  }
+}

@@ -1,0 +1,27 @@
+publishers:
+  -   type: kinesis
+      name: publisher description
+      streamName: test-stream
+      awsConfiguration:
+        endpoint: http://localhost:4567
+        region: us-east-1
+      createStream: true
+      payload: enqueuer
+subscriptions:
+  -   type: kinesis
+      name: my subscription
+      streamName: test-stream
+      awsConfiguration:
+        endpoint: http://localhost:4567
+        region: us-east-1
+      createStream: true
+      timeout: 9000
+      onMessageReceived:
+        script: payload = Buffer.from(message.payload);
+        assertions:
+          -   name: Payload
+              expect: payload
+              toBeEqualTo: `enqueuer`
+          -   name: Beatles song
+              expect: payload.length
+              toBeGreaterThan: 5
